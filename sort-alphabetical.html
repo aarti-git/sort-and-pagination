@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>alphabatical sorts</title>
+    <style type="text/css">
+      .Mytable {
+        width: 500px;
+        border: 1px solid;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      .heading {
+        border-bottom: 1px solid;
+      }
+      th,
+      td {
+        /* border: 1px solid; */
+        /* border-bottom: 1px solid; */
+        text-align: center;
+        padding: 16px;
+      }
+
+      tr {
+        text-align: center;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .btn {
+        float: right;
+      }
+    </style>
+  </head>
+  <body onload="creatRow()">
+    <table class="Mytable">
+      <thead class="heading">
+        <tr>
+          <td>
+            text
+            <button onclick="sortalphabetical()" class="btn">
+              V
+            </button>
+          </td>
+        </tr>
+      </thead>
+      <tbody class="table-body"></tbody>
+    </table>
+    <script>
+      var myList = ["Yogesh", "Aarti", "Suraj", "Anaya", "Krishna"];
+      const tableB = document.querySelector(".table-body");
+      var firstClick = false;
+      function sortalphabetical() {
+        sortText(myList);
+        creatRow();
+      }
+      function creatRow() {
+        tableB.innerHTML = "";
+        for (let i = 0; i < myList.length; i++) {
+          var item = myList[i];
+          var textList = document.createElement("tr");
+
+          var textData = document.createElement("td");
+          textData.innerHTML = item;
+          textList.append(textData);
+          tableB.append(textList);
+        }
+      }
+      function sortText(x) {
+        for (let i = 0; i < myList.length; i++) {
+          var v1 = myList[i];
+
+          for (let j = 0; j < myList.length; j++) {
+            var v2 = myList[j];
+
+            if (firstClick == false) {
+              if (v1.toLowerCase() < v2.toLowerCase()) {
+                var sv = myList[i];
+                myList[j] = sv;
+                myList[i] = v2;
+              }
+            } else {
+              if (v1.toLowerCase() > v2.toLowerCase()) {
+                var sv = myList[i];
+                myList[j] = sv;
+                myList[i] = v2;
+              }
+            }
+          }
+        }
+        firstClick = firstClick ? false : true;
+      }
+    </script>
+  </body>
+</html>

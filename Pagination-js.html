@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./js/jquery.min.js"></script>
+    <style>
+      .pagination {
+        display: inline-block;
+      }
+
+      .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+
+      .pagination a.active {
+        background-color: royalblue;
+        color: white;
+      }
+
+      .pagination a:hover:not(.active) {
+        background-color: #ddd;
+      }
+
+      .pagination a:nth-last-child(1) {
+        border: 1px solid gray;
+      }
+
+      .pagination a:first-child {
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="pagination">
+      <a href="#" onclick="previous()">previous</a>
+      <a href="#" onclick="pagination(this)" class="active page">1</a>
+      <a href="#" onclick="pagination(this)" class="page">2</a>
+      <a href="#" onclick="pagination(this)" class="page">3</a>
+      <a href="#" onclick="pagination(this)" class="page">4</a>
+      <a href="#" onclick="pagination(this)" class="page">5</a>
+      <a href="#" onclick="nextbtn()">Next</a>
+    </div>
+    <script>
+      var count = 0;
+      var page = document.querySelectorAll(".page");
+      // const active = document.querySelector(".active");
+      const n = page.length;
+      var nextList = [6, 7, 8, 9, 10];
+      function pagination(el) {
+        for (let i = 0; i < n; i++) {
+          var items = page[i];
+          items.classList.remove("active");
+        }
+        // count++;
+        el.classList.add("active");
+      }
+
+      function nextbtn() {
+        const active = document.querySelector(".active");
+        count++;
+        if (count < n) {
+          var nextEl = active.nextElementSibling;
+          active.classList.remove("active");
+          nextEl.classList.add("active");
+        } else if (count == n) {
+          active.classList.remove("active");
+          for (let i = 0; i < n; i++) {
+            var items = page[i];
+            items.innerHTML = nextList[i];
+          }
+          page[0].classList.add("active");
+          count = 0;
+        }
+      }
+      function previous() {
+        count--;
+        // const active = document.querySelector(".active");
+        if (count > 0) {
+          var nextEl = active.previousElementSibling;
+          active.classList.remove("active");
+          nextEl.classList.add("active");
+        } else if (count == n) {
+          active.classList.remove("active");
+          for (let i = 0; i < n; i++) {
+            var items = page[i];
+            items.innerHTML = nextList[i];
+          }
+          page[0].classList.add("active");
+          count = 0;
+        }
+      }
+
+      // }
+    </script>
+  </body>
+</html>

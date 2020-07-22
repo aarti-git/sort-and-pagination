@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .Mytable {
+        width: 500px;
+        border: 1px solid;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid;
+        border-left: 1px solid;
+        text-align: center;
+        padding: 16px;
+      }
+
+      /* tr:nth-last-child {
+      } */
+      tr {
+        text-align: center;
+      }
+
+      #buttons button {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+
+      #buttons button.active {
+        background-color: royalblue;
+        color: white;
+      }
+
+      #buttons button:hover:not(.active) {
+        background-color: #ddd;
+      }
+      .btnDiv {
+        display: inline-flex;
+      }
+    </style>
+    <!-- <script>
+      const array = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+      ];
+      function bodyonlod() {
+        // CreatTdList();
+        // pagination();
+
+        var showNo = document.getElementById("showNo");
+        var n = showNo.value;
+        // creat table data
+        function CreatTdList() {
+          for (let i = 0; i < n; i++) {
+            var tableRow = document.createElement("tr");
+            var tabledata = document.createElement("td");
+            tableRow.append(tabledata);
+            document.getElementById("table-row").append(tableRow);
+          }
+        }
+        const tableData = document.querySelectorAll("td");
+        // gajination logic
+        function pagination(x) {
+          var a = n * x - n;
+          var y = 0;
+          for (var i = a; i < n * x; i++) {
+            var items = array[i];
+            tableData[y++].innerHTML = items;
+            console.log(items);
+          }
+        }
+      }
+    </script> -->
+  </head>
+
+  <body>
+    <div>
+      <label>show</label>
+      <select id="showNo" onchange="buildTable(this)">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+      <!-- <button onclick="buildTable(document.getElementById('showNo').value)">
+        clicke me
+      </button> -->
+      <p id="demo"></p>
+    </div>
+    <table class="Mytable">
+      <thead>
+        <tr>
+          <th>
+            text
+          </th>
+          <th>No</th>
+          <th>marks</th>
+        </tr>
+      </thead>
+      <tbody id="table-row"></tbody>
+    </table>
+    <div class="btnDiv">
+      <button onclick="previousbtn()">
+        previous
+      </button>
+      <div id="buttons"></div>
+      <button onclick="nextbtn()">
+        next
+      </button>
+    </div>
+    <script>
+      const array = [
+        {
+          text: "a",
+          no: 1,
+          marks: 90,
+        },
+        {
+          text: "b",
+          no: 2,
+          marks: 10,
+        },
+        {
+          text: "c",
+          no: 3,
+          marks: 50,
+        },
+        {
+          text: "d",
+          no: 4,
+          marks: 80,
+        },
+        {
+          text: "e",
+          no: 5,
+          marks: 90,
+        },
+        {
+          text: "f",
+          no: 6,
+          marks: 40,
+        },
+        {
+          text: "g",
+          no: 7,
+          marks: 60,
+        },
+        {
+          text: "h",
+          no: 8,
+          marks: 20,
+        },
+        {
+          text: "i",
+          no: 9,
+          marks: 30,
+        },
+        {
+          text: "j",
+          no: 10,
+          marks: 90,
+        },
+        {
+          text: "k",
+          no: 11,
+          marks: 70,
+        },
+        {
+          text: "l",
+          no: 12,
+          marks: 50,
+        },
+        {
+          text: "m",
+          no: 13,
+          marks: 30,
+        },
+        {
+          text: "n",
+          no: 14,
+          marks: 90,
+        },
+        {
+          text: "o",
+          no: 15,
+          marks: 100,
+        },
+      ];
+
+      var showNo = document.getElementById("showNo");
+      var n;
+      var count = 0;
+      // function execution
+      buildTable(showNo);
+
+      // creat table
+      function buildTable(selectV) {
+        n = selectV.value;
+        document.getElementById("table-row").innerHTML = " ";
+        for (let i = 0; i < n; i++) {
+          const tableBody = document.querySelector("table tbody");
+          const columnGroup = document.createElement("tr");
+          var data = array[i];
+          for (let columnTitle in data) {
+            const column = document.createElement("td");
+            column.innerHTML = data[columnTitle];
+
+            columnGroup.append(column);
+          }
+
+          tableBody.append(columnGroup);
+        }
+
+        creatbtn();
+      }
+
+      function paginatioNext(x, el) {
+        pagination(x);
+        next(el);
+      }
+
+      // creat button pagination
+      function creatbtn() {
+        var arraylength = array.length;
+        var btnCount = arraylength / n;
+        document.getElementById("buttons").innerHTML = " ";
+        for (j = 0; j < btnCount; j++) {
+          const paginationButton = document.createElement("span");
+          const button = document.createElement("button");
+          let pageNumber = j + 1;
+
+          button.addEventListener("click", function () {
+            paginatioNext(pageNumber, this);
+          });
+          button.innerText = pageNumber;
+          paginationButton.append(button);
+
+          document.getElementById("buttons").append(paginationButton);
+          document.querySelector("#buttons button").classList.add("active");
+          // console.log(btnCount + "btnCount");
+        }
+      }
+      //
+      function next(el) {
+        var btn = document.querySelectorAll("#buttons button");
+        // var activebtn = document.querySelector("#buttons span");
+        for (let i = 0; i < btn.length; i++) {
+          var items = btn[i];
+          items.classList.remove("active");
+        }
+        el.classList.add("active");
+      }
+
+      //
+      function nextbtn() {
+        const active = document.querySelector(".active");
+        var avtiveValue = active.innerHTML;
+        var btn = document.querySelectorAll("#buttons button");
+        // count++;
+        console.log(avtiveValue + "next");
+        if (avtiveValue < btn.length && avtiveValue < 5) {
+          var nextEl = active.parentElement.nextElementSibling;
+          var getBtnsibling = nextEl.firstElementChild;
+          active.classList.remove("active");
+          getBtnsibling.classList.add("active");
+          pagination(parseInt(avtiveValue) + parseInt(1));
+        }
+      }
+      //
+      function previousbtn() {
+        const active = document.querySelector(".active");
+        var avtiveValue = active.innerHTML;
+        var btn = document.querySelectorAll("#buttons button");
+        // count--;
+        console.log(avtiveValue + "previous");
+        if (avtiveValue <= btn.length && avtiveValue > 1) {
+          var nextEl = active.parentElement.previousElementSibling;
+          var getBtnsibling = nextEl.firstElementChild;
+          active.classList.remove("active");
+          getBtnsibling.classList.add("active");
+          pagination(parseInt(avtiveValue) - parseInt(1));
+        }
+      }
+
+      // pagination code
+      function pagination(x) {
+        // console.log(n + "paginatio");
+        var a = n * x - n;
+        var y = 0;
+        var z = 0;
+        var condition = n * x;
+        var tableDataLi = document.querySelectorAll("tbody tr");
+        var td = document.querySelectorAll("tbody tr td");
+        for (var i = a; i < condition; i++) {
+          var items = array[i];
+          // hide extra element
+          if (items == undefined) {
+            tableDataLi[y].style.display = "none";
+          } else {
+            tableDataLi[y].style.display = "table-row";
+          }
+
+          // console.log(items);
+          for (let columnTitle in items) {
+            td[z++].innerHTML = items[columnTitle];
+          }
+          y++;
+        }
+      }
+    </script>
+  </body>
+</html>

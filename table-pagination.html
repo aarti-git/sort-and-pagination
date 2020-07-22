@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .Mytable {
+        width: 500px;
+        border: 1px solid;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid;
+        border-left: 1px solid;
+        text-align: center;
+        padding: 16px;
+      }
+
+      tr {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table class="Mytable">
+      <thead>
+        <tr>
+          <th>
+            no
+          </th>
+        </tr>
+      </thead>
+      <tbody id="table-row">
+        <tr>
+          <td>a</td>
+        </tr>
+        <tr>
+          <td>b</td>
+        </tr>
+        <tr>
+          <td>c</td>
+        </tr>
+        <tr>
+          <td>d</td>
+        </tr>
+        <tr>
+          <td>e</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button onclick="firstBtn()">1</button>
+      <button onclick="secondBtn()">2</button>
+    </div>
+    <script>
+      const tableRow = document.querySelectorAll("#table-row tr td");
+      const secondArray = ["yog", "aaru", "choti", "sony", "guddi"];
+      const firstArray = ["aarti", "yogesh", "anaya", "krishna", "kirti"];
+
+      // bodyLoad();
+
+      // function bodyLoad() {
+      //   for (var i = 0; i < tableRow.length; i++) {
+      //     var listNo = firstArray[i];
+      //     tableRow.innerHTML = listNo[i];
+      //   }
+      // }
+      function secondBtn() {
+        for (var i = 0; i < tableRow.length; i++) {
+          var listNo = tableRow[i];
+          listNo.innerHTML = secondArray[i];
+        }
+      }
+      function firstBtn() {
+        for (var i = 0; i < tableRow.length; i++) {
+          var listNo = tableRow[i];
+          listNo.innerHTML = firstArray[i];
+        }
+      }
+    </script>
+  </body>
+</html>

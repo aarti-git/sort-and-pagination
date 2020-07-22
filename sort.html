@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!-- <script src="./js/jquery.min.js"></script> -->
+    <!-- x.sort() ...this is js sorting  function-->
+    <!-- x.sort(function(a, b){return(a - b)});.... this is for unsort -->
+    <title>sort table</title>
+    <style type="text/css">
+      .Mytable {
+        width: 300px;
+        border: 1px solid;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        /* border: 1px solid; */
+        border-left: 1px solid;
+        text-align: center;
+        padding: 16px;
+      }
+
+      tr {
+        text-align: center;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .btn {
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body onload="tableData(studentData.Sr)">
+    <h1>sort list</h1>
+    <table class="Mytable">
+      <thead>
+        <tr>
+          <th onclick="sorting(studentData.Sr)">
+            no
+          </th>
+          <th onclick="sorting(studentData.names)">
+            text
+          </th>
+          <th onclick="sorting(studentData.marks)">
+            marks (%)
+          </th>
+        </tr>
+      </thead>
+      <tbody id="table-row"></tbody>
+    </table>
+    <script>
+      const table_list = document.querySelector("#table-row");
+
+      var studentData = {
+        Sr: [2, 4, 1, 5, 3],
+        // Sr: [1, 2, 3, 4, 5],
+        names: ["yogesh", "aarti", "suraj", "anaya", "krishna"],
+        marks: [90, 50, 91, 94, 80],
+      };
+      var isClick = true;
+
+      function sorting(data) {
+        sort(data, isClick);
+        tableData(studentData.Sr);
+        isClick = isClick ? false : true;
+      }
+
+      function tableData(a) {
+        table_list.innerHTML = "";
+        for (let i = 0; i < a.length; i++) {
+          var item = a[i];
+          var listItem = document.createElement("tr");
+
+          var tabledata = document.createElement("td");
+          tabledata.innerHTML = item;
+
+          var tabledataText = document.createElement("td");
+          tabledataText.innerHTML = studentData.names[i];
+
+          var tabledatamarks = document.createElement("td");
+          tabledatamarks.innerHTML = studentData.marks[i];
+
+          listItem.append(tabledata);
+          listItem.append(tabledataText);
+          listItem.append(tabledatamarks);
+
+          table_list.append(listItem);
+          listItem.classList.add("trclass");
+        }
+      }
+
+      // asending event
+      function sort(list, asending) {
+        var col1, col2;
+        if (list == studentData.Sr) {
+          col1 = studentData.names;
+          col2 = studentData.marks;
+        } else if (list == studentData.names) {
+          col1 = studentData.Sr;
+          col2 = studentData.marks;
+        } else {
+          col1 = studentData.Sr;
+          col2 = studentData.names;
+        }
+
+        for (let i = 0; i < list.length; i++) {
+          const v1 = list[i];
+          const item1 = col1[i];
+          const ListItem1 = col2[i];
+          for (let j = 0; j < list.length; j++) {
+            const v2 = list[j];
+            const item2 = col1[j];
+            const ListItem2 = col2[j];
+            if (asending) {
+              if (v1 < v2) {
+                const sv = list[i];
+                const sItems1 = col1[i];
+                const slistItems2 = col2[i];
+                list[j] = sv;
+                list[i] = v2;
+                //  first column
+                col1[j] = sItems1;
+                col1[i] = item2;
+                // second column
+                col2[j] = slistItems2;
+                col2[i] = ListItem2;
+              }
+            } else {
+              // this for desending
+              if (v1 > v2) {
+                const sv = list[i];
+                const sItems1 = col1[i];
+                const slistItems2 = col2[i];
+                list[j] = sv;
+                list[i] = v2;
+                // first column
+                col1[j] = sItems1;
+                col1[i] = item2;
+                // second column
+                col2[j] = slistItems2;
+                col2[i] = ListItem2;
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

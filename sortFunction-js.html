@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        .list{
+            display: block;
+        }
+    </style>   
+    <!-- x.sort() ...this is js sorting  function-->
+    <!-- x.sort(function(a, b){return(a - b)});.... this is for unsort -->
+</head>
+  <body>
+    <h1>javascript sort()</h1>
+    <button onclick="sortting()">sort</button>
+    <div class="nameList list"></div></br>
+
+    <button onclick="asending()">sort2</button>
+    <div class="nameList2 list"></div></br>
+
+    <button onclick="desending()">sort3</button>
+    <div class="nameList3 list"></div></br>
+
+    <button onclick="toggleSort()">sort4</button>
+    <div class="nameList4 list"></div></br>
+
+    <script>
+      var nameArray = ["yogesh", "aarti", "suraj", "anaya", "krishna"];
+      document.querySelector(".nameList").innerHTML = nameArray;
+      //   sortting using function sort();
+      function sortting() {
+        nameArray.sort();
+        document.querySelector(".nameList").innerHTML = nameArray;
+      }
+
+    //   sortting using argumentl
+    var points = [40, 100, 1, 5, 25, 10];
+    document.querySelector(".nameList2").innerHTML = points;
+     function asending() {
+            points.sort(function(a,b){return a - b});
+            document.querySelector(".nameList2").innerHTML = points;
+        }
+//   sortting using argumentl desending
+          document.querySelector(".nameList3").innerHTML = points;
+
+          function desending() {
+            points.sort(function (a, b) { return b - a });
+            document.querySelector(".nameList3").innerHTML = points;
+          }
+        //toggle sortting
+        var isClick = false;
+         document.querySelector(".nameList4").innerHTML = points;
+        function toggleSort(){
+          if(isClick == false){
+            points.sort(function (a, b) { return a - b });
+            document.querySelector(".nameList4").innerHTML = points;
+          }else{
+            points.sort(function (a, b) { return b - a });
+            document.querySelector(".nameList4").innerHTML = points;
+          }
+          isClick = ! isClick;
+        }
+
+    </script>
+  </body>
+</html>

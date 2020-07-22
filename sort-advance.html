@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>sort table</title>
+    <style type="text/css">
+      .Mytable {
+        width: 300px;
+        border: 1px solid;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        /* border: 1px solid; */
+        border-left: 1px solid;
+        text-align: center;
+        padding: 16px;
+      }
+
+      tr {
+        text-align: center;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+
+  <body onload="initTable()">
+    <h1>sort list</h1>
+    <table class="Mytable">
+      <thead></thead>
+      <tbody id="table-row"></tbody>
+    </table>
+    <script>
+      const table_list = document.querySelector("#table-row");
+      const dataset = [
+        {
+          sr: 1,
+          name: "Yogesh",
+          marks: 100,
+          age: 29,
+        },
+        {
+          sr: 2,
+          name: "Aarti",
+          marks: 10,
+          age: 22,
+        },
+        {
+          sr: 3,
+          name: "Suraj",
+          marks: 101,
+          age: 16,
+        },
+        {
+          sr: 4,
+          name: "Anaya",
+          marks: 0,
+          age: 3,
+        },
+        {
+          sr: 5,
+          name: "Krishna",
+          marks: 50,
+          age: 12,
+        },
+      ];
+
+      let sortToggle = true;
+      function sorting(column) {
+        sort(column, sortToggle);
+        sortToggle = !sortToggle;
+
+        // empty older values in table
+        table_list.innerHTML = "";
+
+        // re-build table
+        buildTable();
+      }
+
+      function initTable() {
+        // create table head
+        createColumns();
+
+        // create table
+        buildTable();
+      }
+
+      function buildTable() {
+        dataset.forEach(function (data) {
+          const tableBody = document.querySelector("table tbody");
+          const columnGroup = document.createElement("tr");
+
+          for (let columnTitle in data) {
+            const column = document.createElement("td");
+            column.innerHTML = data[columnTitle];
+
+            columnGroup.append(column);
+          }
+
+          tableBody.append(columnGroup);
+        });
+      }
+
+      function createColumns() {
+        const tableHead = document.querySelector("table thead");
+        const columnGroup = document.createElement("tr");
+        const firstData = dataset[0];
+
+        for (let columnTitle in firstData) {
+          const column = document.createElement("th");
+          column.innerHTML = columnTitle;
+
+          column.addEventListener("click", function () {
+            sorting(columnTitle);
+          });
+
+          columnGroup.append(column);
+        }
+
+        tableHead.append(columnGroup);
+      }
+
+      // asending event
+      function sort(columnKey, asending) {
+        for (let i = 0; i < dataset.length; i++) {
+          const v1 = dataset[i];
+
+          for (let j = i; j < dataset.length; j++) {
+            const v2 = dataset[j];
+
+            if (asending) {
+              if (v1[columnKey] < v2[columnKey]) {
+                const sv = dataset[i];
+
+                dataset[j] = sv;
+                dataset[i] = v2;
+              }
+            } else {
+              if (v1[columnKey] > v2[columnKey]) {
+                const sv = dataset[i];
+
+                dataset[j] = sv;
+                dataset[i] = v2;
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
