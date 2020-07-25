@@ -22,6 +22,9 @@
 
     <button onclick="toggleSort()">sort4</button>
     <div class="nameList4 list"></div></br>
+    <!--  -->
+    
+
 
     <script>
       var nameArray = ["yogesh", "aarti", "suraj", "anaya", "krishna"];
@@ -48,16 +51,57 @@
           }
         //toggle sortting
         var isClick = false;
-         document.querySelector(".nameList4").innerHTML = points;
+         document.querySelector(".nameList4").innerHTML = nameArray;
         function toggleSort(){
           if(isClick == false){
-            points.sort(function (a, b) { return a - b });
-            document.querySelector(".nameList4").innerHTML = points;
+            nameArray.sort(function (a, b) { return a - b });
+            document.querySelector(".nameList4").innerHTML = nameArray;
           }else{
-            points.sort(function (a, b) { return b - a });
-            document.querySelector(".nameList4").innerHTML = points;
+            nameArray.sort(function (a, b) { return b - a });
+            document.querySelector(".nameList4").innerHTML = nameArray;
           }
           isClick = ! isClick;
+        }
+
+      //  
+      
+      var items = [
+          { name: 'Edward', value: 21 },
+          { name: 'Sharpe', value: 37 },
+          { name: 'And', value: 45 },
+          { name: 'The', value: -12 },
+          { name: 'Magnetic', value: 13 },
+          { name: 'Zeros', value: 37 }
+        ];
+        //  for (let i = 0; i < items.length; i++) {
+        //     var v1 = items[i];
+        //      for (let columnTitle in items) {
+        //          document.querySelector(".nameList5").innerHTML = items[columnTitle];
+        //       }
+        //   }
+      
+        // sort by value
+        function fun(){
+        items.sort(function (a, b) {
+          return a.value - b.value;
+        });
+
+        // sort by name
+        items.sort(function (a, b) {
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1;
+           
+          }
+          if (nameA > nameB) {
+            return 1;
+             
+          }
+
+          // names must be equal
+          return 0;
+        });
         }
 
     </script>
